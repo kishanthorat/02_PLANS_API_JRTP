@@ -20,36 +20,36 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="PLAN_TABLE")
+@Table(name = "PLAN_TABLE")
 public class Plan {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="PLAN_ID")
+	@Column(name = "PLAN_ID")
 	private Integer planId;
-	@Column(name="PLAN_NAME")
+	@Column(name = "PLAN_NAME")
 	private String planName;
-	@Column(name="PLAN_START_DATE")
+	@Column(name = "PLAN_START_DATE")
 	private LocalDate planStartDate;
-	@Column(name="PLAN_END_DATE")
+	@Column(name = "PLAN_END_DATE")
 	private LocalDate planEndDate;
-	
-	@Column(name="PLAN_CATEGORY_ID")
+
+	@Column(name = "PLAN_CATEGORY_ID")
 	private Integer categoryId;
-	
-	@Column(name="ACTIVE1_SW") 
+
+	@Column(name = "ACTIVE1_SW")
 	private String activeSw;
-	
-	@Column(name="CREATED_BY", updatable=false)
+
+	@Column(name = "CREATED_BY", updatable = false)
 	private String createdBy;
-	@Column(name="UPDATED_BY", insertable = false)
+	@Column(name = "UPDATED_BY", insertable = false)
 	private String updatedBy;
-	
-	@Column(name="CREATE_DATE")
+
+	@Column(name = "CREATE_DATE")
 	@CreationTimestamp
 	private LocalDate createDate;
 	@UpdateTimestamp
-	@Column(name="UPDATE_DATE")
+	@Column(name = "UPDATE_DATE")
 	private LocalDate updateDate;
 
 }
