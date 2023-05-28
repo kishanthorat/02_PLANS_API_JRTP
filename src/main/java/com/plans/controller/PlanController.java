@@ -15,13 +15,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.plans.entity.Plan;
+import com.plans.properties.AppProperties;
 import com.plans.service.PlanService;
 
 @RestController
 public class PlanController {
 
-	@Autowired
+//	@Autowired
 	private PlanService planService;
+	
+	private Map<String, String> messages;
+
+//	@Autowired
+//	private AppProperties appProp;
+	
+	public PlanController(PlanService planService, AppProperties appProp)
+	{
+		this.planService=planService;
+		this.messages=appProp.getMessages();
+		System.err.println(this.messages);
+	}
 
 	@GetMapping("/categories")
 	public ResponseEntity<Map<Integer, String>> planCategory() {
@@ -37,10 +50,14 @@ public class PlanController {
 
 		boolean savePlan = planService.savePlan(plan);
 
+		//Map<String, String> message = appProp.getMessage(); coz we take it globally by using constructor
+
 		if (savePlan) {
-			responseMsg = "Plan Save";
+			responseMsg = messages.get("planSaveSucc");
+			// responseMsg = "Plan Save";
 		} else {
-			responseMsg = "Not save";
+			responseMsg = messages.get("planSaveFail");
+			// responseMsg = "Plan Not Save";
 		}
 		return new ResponseEntity<>(responseMsg, HttpStatus.CREATED);
 	}
@@ -65,10 +82,14 @@ public class PlanController {
 	public ResponseEntity<String> updatePlan(@RequestBody Plan plan) {
 		boolean updatePlan = planService.updatePlan(plan);
 		String responseMsg = "";
+
+		//Map<String, String> message = appProp.getMessage();
 		if (updatePlan) {
-			responseMsg = "Plan Update";
+			// responseMsg = "Plan Update";
+			responseMsg = messages.get("planUpdateSucc");
 		} else {
-			responseMsg = "Not Update";
+			// responseMsg = "Not Update";
+			responseMsg = messages.get("planUpdateFail");
 		}
 		return new ResponseEntity<>(responseMsg, HttpStatus.OK);
 	}
@@ -76,11 +97,16 @@ public class PlanController {
 	@DeleteMapping("/plan/{planId}")
 	public ResponseEntity<String> deletePlan(@PathVariable Integer planId) {
 		String responseMsg = "";
+
+	//	Map<String, String> message = appProp.getMessage();
 		boolean deletePlan = planService.deletePlan(planId);
 		if (deletePlan) {
-			responseMsg = "Plan Delete";
+
+			responseMsg = messages.get("planDeleteSucc");
+			// responseMsg = "Plan Delete";
 		} else {
-			responseMsg = "Not Delete";
+			responseMsg = messages.get("planDeleteFail");
+			// responseMsg = "Not Delete";
 		}
 
 		return new ResponseEntity<>(responseMsg, HttpStatus.OK);
@@ -91,10 +117,14 @@ public class PlanController {
 		boolean statusChange = planService.planStatusChange(planId, status);
 		String responseMsg = "";
 
+		//Map<String, String> message = appProp.getMessage();
 		if (statusChange) {
-			responseMsg = "Status Change";
+
+			responseMsg = messages.get("planStatusChange");
+			// responseMsg = "Status Change";
 		} else {
-			responseMsg = "Status Not Change";
+			responseMsg = messages.get("planStatusChangeFail");
+			// responseMsg = "Status Not Change";
 		}
 		return new ResponseEntity<>(responseMsg, HttpStatus.OK);
 
