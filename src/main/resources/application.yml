@@ -14,3 +14,15 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: 'ant-path-matcher'
+
+plan-api:
+ messages:
+  planSaveSucc: Plan Save Successfull..
+  planSaveFail: Plan Save Fail..
+  planUpdateSucc: Plan Update Successfull..
+  planUpdateFail: Plan Update Fail..
+  planDeleteSucc: Plan Delete Successfully..
+  planDeleteFail: Plan Delete Fail..
+  planStatusChange: Plan Status Change Successfully..
+  planStatusChangeFail: Plan Status Change Fail..
+        
