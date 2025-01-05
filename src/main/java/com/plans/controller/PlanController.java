@@ -44,7 +44,7 @@ public class PlanController {
 		return new ResponseEntity<>(planCategories, HttpStatus.OK);
 	}
 
-	@PostMapping("/Plan")
+	@PostMapping("/plan")
 	public ResponseEntity<String> savePlan(@RequestBody Plan plan) {
 //		String responseMsg = "";
 		String responseMsg = AppConstant.Empty_STR;
@@ -66,7 +66,7 @@ public class PlanController {
 		return new ResponseEntity<>(responseMsg, HttpStatus.CREATED);
 	}
 
-	@GetMapping("/Plan")
+	@GetMapping("/plan")
 	public ResponseEntity<List<Plan>> getPlan() {
 
 		List<Plan> allPlans = planService.getAllPlans();
@@ -84,11 +84,11 @@ public class PlanController {
 
 	@PutMapping("/plan")
 	public ResponseEntity<String> updatePlan(@RequestBody Plan plan) {
-		boolean updatePlan = planService.updatePlan(plan);
 		
 		//String responseMsg = "";
-		String responseMsg = AppConstant.Empty_STR;
-		
+				String responseMsg = AppConstant.Empty_STR;
+				
+		boolean updatePlan = planService.updatePlan(plan);
 
 		//Map<String, String> message = appProp.getMessage();
 		if (updatePlan) {
@@ -129,7 +129,7 @@ public class PlanController {
 		return new ResponseEntity<>(responseMsg, HttpStatus.OK);
 	}
 
-	@PutMapping("/stratus-change/{planId}/{status}")
+	@PutMapping("/status-change/{planId}/{status}")
 	public ResponseEntity<String> statusChange(@PathVariable Integer planId, @PathVariable String status) {
 		boolean statusChange = planService.planStatusChange(planId, status);
 		//String responseMsg = "";
